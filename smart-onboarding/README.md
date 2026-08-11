@@ -16,7 +16,7 @@ A guided onboarding flow (Smart Onboarding Assistant) increased 7-day retention 
 
 D7 retention had plateaued at ~36% for three quarters, representing a ceiling on new user value. Product analytics suggested the root cause: new users landed on an empty home screen, never set up their first project, and churned before reaching their first useful moment.
 
-The product team built the Smart Onboarding Assistant—a guided flow that walks new users through creating their first project in their first session, positioning them to engage with core features.
+The product team built the Smart Onboarding Assistant, a guided flow that walks new users through creating their first project in their first session, positioning them to engage with core features.
 
 Question: Does guided onboarding improve retention? If so, by how much?
 
@@ -69,7 +69,7 @@ We're testing whether onboarding quality matters for early retention, not assumi
 We're 95% confident the true lift falls between +1.91pp and +6.31pp. Even the conservative lower bound represents a meaningful and achievable business impact.
 
 **Why Intent-to-Treat?**
-We assigned users to treatment but didn't force them to use the Assistant. ITT analysis counts all users in their assigned arm, regardless of whether they engaged. This is the only comparison that answers "what happens if we ship to everyone?"—the actual business question.
+We assigned users to treatment but didn't force them to use the Assistant. ITT analysis counts all users in their assigned arm, regardless of whether they engaged. This is the only comparison that answers "what happens if we ship to everyone?" That's the actual business question.
 
 ### Guardrail Metrics: Ensuring No Negative Trade-Offs
 
@@ -79,7 +79,7 @@ We assigned users to treatment but didn't force them to use the Assistant. ITT a
 | Median Screens Viewed | 12 | 14 | Mann-Whitney U | <0.0001 | Exploration up ✓ |
 | Mean Bounce Day 1 | 12.1% | 11.3% | χ² | 0.24 | Balanced |
 
-**Verdict:** Both guardrails moved positive. Session length and screens viewed increased together with retention—this is the hallmark of a real effect, not a measurement artifact. Users in treatment weren't just retaining; they were exploring more.
+**Verdict:** Both guardrails moved positive. Session length and screens viewed increased together with retention. That's the hallmark of a real effect, not a measurement artifact. Users in treatment weren't just retaining; they were exploring more.
 
 ---
 
@@ -299,7 +299,7 @@ jupyter notebook analysis.ipynb
 
 2. **D7 is a proxy.** D7 retention correlates with LTV, but we haven't measured 30/90-day outcomes. The holdback addresses this.
 
-3. **Adopter analysis is correlational.** Users who engage with features tend to retain anyway. We can't claim the Assistant caused all retention in the adopter segment—only that ITT +4.11pp is the causal effect.
+3. **Adopter analysis is correlational.** Users who engage with features tend to retain anyway. We can't claim the Assistant caused all retention in the adopter segment. Only that ITT +4.11pp is the causal effect.
 
 4. **Seasonal effects.** Test ran in summer; holiday seasonality not captured. Post-launch monitoring is essential.
 

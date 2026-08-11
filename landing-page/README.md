@@ -6,7 +6,7 @@
 
 ## Quick summary
 
-A redesigned landing page lifted conversion from 3.08% to 4.44%, a statistically significant +1.35 percentage-point gain (p = 0.0013). Bounce rate dropped and time on page went up at the same time, so the conversion number isn't standing alone — engagement moved with it. Point-estimate value is roughly $144K/year on an assumed 71,000 annual visitors; even the conservative end of the confidence interval clears the estimated $50K development cost.
+A redesigned landing page lifted conversion from 3.08% to 4.44%, a statistically significant +1.35 percentage-point gain (p = 0.0013). Bounce rate dropped and time on page went up at the same time, so the conversion number isn't standing alone. Engagement moved with it. Point-estimate value is roughly $144K/year on an assumed 71,000 annual visitors; even the conservative end of the confidence interval clears the estimated $50K development cost.
 
 **Recommendation:** Ship the redesign.
 
@@ -40,10 +40,10 @@ The raw export had 8,435 rows but only 8,200 unique visitors — 235 people show
 
 | Check | Result | Verdict |
 |---|---|---|
-| Sample ratio (4,120 vs 4,080) | χ² p = 0.66 | Pass — no assignment bug |
+| Sample ratio (4,120 vs 4,080) | χ² p = 0.66 | Pass, no assignment bug |
 | Device balance across arms | χ² p = 0.67 | Pass |
 | Traffic source balance across arms | χ² p = 0.50 | Pass |
-| Visitors appearing in both arms | 0 | Pass — no cross-contamination |
+| Visitors appearing in both arms | 0 | Pass, no cross-contamination |
 
 Nothing here suggested a broken randomizer, so the primary result can be read at face value.
 
@@ -57,7 +57,7 @@ Nothing here suggested a broken randomizer, so the primary result can be read at
 | Treatment | 4,080 | 181 | 4.44% | — |
 | **Difference** | — | +54 | **+1.35pp** | **[+0.53pp, +2.18pp]** |
 
-z = 3.22, p = 0.00127. If the redesign genuinely did nothing, a gap this size would show up in roughly 1 out of 800 experiments by chance alone — that's a lot more confidence than the 1-in-20 bar of α = 0.05.
+z = 3.22, p = 0.00127. If the redesign genuinely did nothing, a gap this size would show up in roughly 1 out of 800 experiments by chance alone. That's a lot more confidence than the 1-in-20 bar of α = 0.05.
 
 The 95% CI says the true lift is plausibly anywhere from +0.53pp to +2.18pp. The business case in this document leans on the lower bound, not the flashier point estimate, because that's the number I'd still be comfortable defending if the true effect turned out to be on the weak end of plausible.
 
@@ -70,7 +70,7 @@ The 95% CI says the true lift is plausibly anywhere from +0.53pp to +2.18pp. The
 | Bounce rate | 64.6% | 57.9% | Two-proportion z | < 0.000001 |
 | Time on page (median) | 16.9s | 20.0s | Mann-Whitney U | < 0.000001 |
 
-Time on page is heavily right-skewed (skew ≈ 6.25), which is why it's tested with Mann-Whitney rather than a t-test — a handful of very long sessions would otherwise drag the mean around and make a parametric test unreliable. Both guardrails moved the same direction as conversion. That consistency is what makes we trust the primary result rather than suspect a tracking artifact.
+Time on page is heavily right-skewed (skew ≈ 6.25), which is why it's tested with Mann-Whitney rather than a t-test. A handful of very long sessions would otherwise drag the mean around and make a parametric test unreliable. Both guardrails moved the same direction as conversion. That consistency is what makes we trust the primary result rather than suspect a tracking artifact.
 
 ---
 
@@ -115,11 +115,11 @@ Against an estimated $50K development cost, even the conservative case clears br
 
 ## Files in this folder
 
-- `analysis.ipynb` — the full pipeline: visitor-level rollup, randomization checks, primary z-test, guardrail tests, segment analysis, the peeking chart, and the business impact scenarios
-- `landing_page_ab_test_dataset.csv` — raw visitor-session export, one row per visit
-- `landing_page_visitor_level.csv` — the de-duplicated, visitor-level analytical table the analysis actually runs on
-- `landing_page_test_summary.csv` — the final aggregated result, ready to feed a BI tool
-- `landing_page_ab_dashboard.pbix` — the Power BI executive dashboard built from the summary output
+- `analysis.ipynb`: the full pipeline. Visitor-level rollup, randomization checks, primary z-test, guardrail tests, segment analysis, the peeking chart, and the business impact scenarios
+- `landing_page_ab_test_dataset.csv`: raw visitor-session export, one row per visit
+- `landing_page_visitor_level.csv`: the de-duplicated, visitor-level analytical table the analysis actually runs on
+- `landing_page_test_summary.csv`: the final aggregated result, ready to feed a BI tool
+- `landing_page_ab_dashboard.pbix`: the Power BI executive dashboard built from the summary output
 
 ---
 
@@ -127,5 +127,5 @@ Against an estimated $50K development cost, even the conservative case clears br
 
 - Synthetic data, built to mirror real experimental structure but not drawn from an actual production system.
 - Financial figures are scenario estimates based on stated traffic and value assumptions, not observed revenue.
-- Segment findings are directional, not independently proven — none survive multiple-comparison correction on their own.
+- Segment findings are directional, not independently proven. None survive multiple-comparison correction on their own.
 - 42 days captures one season and one set of external conditions. A real rollout would benefit from a longer observation window before fully retiring the control experience.

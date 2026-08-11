@@ -10,7 +10,7 @@ This document explains the statistical choices, test selection, and rigor behind
 
 Both experiments used 50/50 random assignment at the user/visitor level. Randomization does one critical thing: it ensures treatment and control groups are exchangeable (statistically identical in expectation before the experiment).
 
-This allows us to attribute differences in outcomes to the treatment—not to pre-existing differences between groups.
+This allows us to attribute differences in outcomes to the treatment, not to pre-existing differences between groups.
 
 **What randomization protects against:**
 - Selection bias (users who choose treatment might be different)
@@ -73,7 +73,7 @@ This means: If there's truly no effect, we'd see a difference this large only 0.
 - Mean and median diverge significantly (mean is inflated by outliers)
 
 **The Alternative (Welch's t-test):**
-We also ran Welch's t-test (doesn't assume equal variances) and got p < 0.01 for both metrics. The Mann-Whitney results align, so test choice doesn't matter here—but Mann-Whitney is more robust to distributional violations.
+We also ran Welch's t-test (doesn't assume equal variances) and got p < 0.01 for both metrics. The Mann-Whitney results align, so test choice doesn't matter here, though Mann-Whitney is more robust to distributional violations.
 
 **Interpretation:**
 Mann-Whitney p-value: Probability of observing this data if treatment and control come from the same distribution.

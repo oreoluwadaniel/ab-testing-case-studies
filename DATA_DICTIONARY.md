@@ -181,7 +181,7 @@ The primary causal comparison is:
 
 # 7. Primary Metrics
 
-## Landing Page — Conversion Rate
+## Landing Page: Conversion Rate
 
 ```text
 Conversion Rate =
@@ -192,7 +192,7 @@ Used to evaluate whether the redesigned landing page changes the probability of 
 
 ---
 
-## Smart Onboarding — Day-7 Retention
+## Smart Onboarding: Day-7 Retention
 
 ```text
 D7 Retention =
