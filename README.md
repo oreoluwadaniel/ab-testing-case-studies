@@ -1,120 +1,120 @@
-# A/B Testing and Product Experimentation
+# A/B Testing & Product Experimentation
 
-Two product experiments showing how I would use data to decide whether a product change is worth shipping.
+Two product experiments built around one practical question:
 
-Product teams do not need another conversion chart. They need to know whether a change actually improved the customer outcome, how certain the result is, and whether the size of the improvement is worth acting on.
+**Did the change improve the customer outcome enough to justify shipping it?**
 
-Both datasets are synthetic. The numbers are examples used to show the analysis process, not results from a real company.
+The datasets are synthetic. The purpose is to show the full decision process from experiment design and validation through statistical testing, uncertainty, and product recommendation.
 
-| Case study | Question | Result |
+| Experiment | Business question | Result |
 |---|---|---|
 | [Landing Page Redesign](landing-page/) | Does the new page convert more visitors? | **+1.35pp conversion lift** |
 | [Smart Onboarding Assistant](smart-onboarding/) | Does guided onboarding improve retention? | **+4.11pp D7 retention lift** |
 
+---
+
 ## 01. Landing Page Redesign
 
-**Decision:** Should the new landing page replace the old one?
+**Decision:** Should the redesigned landing page replace the current version?
 
 The test covered **8,200 visitors over 42 days**.
 
-Conversion moved from **3.08% to 4.44%**, a **1.35 percentage-point lift** and **43.9% relative improvement**.
+| Metric | Control | Treatment |
+|---|---:|---:|
+| Conversion | 3.08% | **4.44%** |
+| Absolute lift | | **+1.35pp** |
+| Relative lift | | **+43.9%** |
+| p-value | | **0.0013** |
+| 95% CI | | **+0.53pp to +2.18pp** |
 
-The p-value was **0.0013**, with a 95% confidence interval of **+0.53pp to +2.18pp**.
+Bounce rate also fell and time on page increased, giving the conversion result supporting evidence rather than leaving it as a standalone metric.
 
-Bounce rate also fell and time on page increased.
-
-**What I would do:** the evidence supports rolling out the redesign for the tested traffic, while continuing to watch the result after release.
+**Recommendation:** Roll out the redesign for the tested traffic and continue monitoring conversion after release.
 
 [Read the full landing page case study →](landing-page/)
 
+---
+
 ## 02. Smart Onboarding Assistant
 
-**Decision:** Can guided onboarding improve early retention?
+**Decision:** Does guided onboarding improve early retention?
 
 The experiment covered **7,500 new mobile users**.
 
-D7 retention moved from **36.54% to 40.65%**, a **4.11 percentage-point lift** and **11.3% relative improvement**.
+| Metric | Control | Treatment |
+|---|---:|---:|
+| D7 retention | 36.54% | **40.65%** |
+| Absolute lift | | **+4.11pp** |
+| Relative lift | | **+11.3%** |
+| p-value | | **0.0003** |
+| 95% CI | | **+1.91pp to +6.31pp** |
 
-The p-value was **0.0003**, with a 95% confidence interval of **+1.91pp to +6.31pp**.
+There is an important product signal behind the headline result: only **37.8% of treatment users used the Assistant**.
 
-There is a catch. Only **37.8% of treatment users actually used the Assistant**. The next test should therefore look at whether better exposure increases adoption and whether the retention effect holds for more users.
+That makes the next question more useful than simply declaring the experiment a win:
+
+**Can better exposure increase Assistant adoption and extend the retention benefit to more users?**
 
 [Read the full onboarding case study →](smart-onboarding/)
 
-## How I make the decision
+---
 
-I don't ship a feature just because the number looks good.
+## How I evaluate an experiment
 
-For each experiment I check:
+A higher treatment number is not enough.
 
-- Was the experiment randomized correctly?
-- Is the lift statistically reliable?
-- How large could the real effect be?
-- Does the result hold across important groups?
-- Are supporting engagement measures moving in the same direction?
-- Is the effect large enough to matter to the business?
-- Did the test have enough power?
-- Are we analyzing everyone who was assigned to treatment, or only the people who chose to use the feature?
+Before recommending a product change, I check:
 
-The final question is simple: **what should the product team do next?**
+- Was assignment randomized correctly?
+- Is the observed difference statistically reliable?
+- How large could the real effect reasonably be?
+- Does the result hold across important segments?
+- Are supporting user behaviours moving in the same direction?
+- Is the improvement large enough to matter commercially?
+- Did the experiment have enough statistical power?
+- Are we measuring everyone assigned to treatment or only people who chose to use the feature?
 
-## Main statistical choices
+The final output is not a p-value.
 
-**Conversion and retention:** two-proportion z-tests for the primary binary outcomes.
+**It is a product decision.**
 
-**Engagement:** Mann-Whitney U tests for skewed session and screen-count data.
+---
 
-**Uncertainty:** confidence intervals are reported alongside p-values.
+## Statistical approach
 
-**Multiple comparisons:** Bonferroni correction was used for segment tests.
+**Primary conversion and retention metrics**  
+Two-proportion z-tests for binary outcomes.
 
-**Causal analysis:** intent-to-treat is the main analysis. Adopter results are supporting evidence, not proof that the feature caused the outcome.
+**Engagement metrics**  
+Mann-Whitney U tests for skewed session and screen-count data.
 
-**Experiment quality:** power and minimum detectable effect were checked before interpreting the size of the result.
+**Uncertainty**  
+95% confidence intervals reported alongside p-values.
 
-## What this shows
+**Segment testing**  
+Bonferroni correction used to control false positives across multiple segment comparisons.
 
-The workflow is:
+**Causal interpretation**  
+Intent-to-treat is the primary analysis. Adopter analysis is treated as supporting evidence, not as proof of causality.
 
-**Product idea → controlled test → statistical result → business impact → shipping decision**
+**Experiment design**  
+Power and minimum detectable effect are considered before interpreting the size of the result.
 
-The aim is not to collect significant p-values. It is to answer practical questions:
+---
 
-- Should we ship it?
-- Should we keep testing?
-- What should we change next?
-- Is the expected upside large enough to justify the work?
-
-## What's included
+## What this project demonstrates
 
 ```text
-AB-Testing/
-├── README.md
-├── METHODOLOGY.md
-├── DATA_DICTIONARY.md
-│
-├── landing-page/
-│   ├── README.md
-│   ├── analysis.ipynb
-│   └── landing_page_ab_dashboard.pbix
-│
-└── smart-onboarding/
-    ├── README.md
-    └── analysis.ipynb
-```
-
-### Tools
-
-Python, pandas, NumPy, SciPy, statsmodels, matplotlib, Jupyter, Power BI, Git/GitHub.
-
-The notebooks contain the analysis from data checks through statistical testing and interpretation.
-
-## Important limitations
-
-- The datasets are synthetic.
-- Financial impact estimates are scenarios, not observed company revenue.
-- The onboarding test ran below its target statistical power, so the confidence interval matters when judging the size of the opportunity.
-- Segment findings are exploratory unless they were independently powered.
-- D7 retention and a 42-day conversion test are early indicators. A real rollout should include longer-term monitoring or a holdout group.
-
-The standard I use is simple: test the idea, measure the uncertainty, understand what the result means for the business, and then decide what to do next.
+Product idea
+     ↓
+Controlled experiment
+     ↓
+Data validation
+     ↓
+Statistical testing
+     ↓
+Effect size + uncertainty
+     ↓
+Business impact
+     ↓
+Product decision
