@@ -1,115 +1,91 @@
-# A/B Testing & Product Experimentation
+# A/B Testing and Product Experimentation
 
-**Two product experiments showing how data can turn product ideas into better shipping decisions.**
+Two product experiments showing how I would use data to decide whether a product change is worth shipping.
 
-Product teams do not need another dashboard showing conversion rates. They need to know whether a change actually improved the customer outcome, whether the result is reliable, and whether the improvement is large enough to justify rollout.
+Product teams do not need another conversion chart. They need to know whether a change actually improved the customer outcome, how certain the result is, and whether the size of the improvement is worth acting on.
 
-This portfolio applies that approach to two common product decisions:
+Both datasets are synthetic. The numbers are examples used to show the analysis process, not results from a real company.
 
-| Case Study                                      | Business Question                         | Result                        |
-| ----------------------------------------------- | ----------------------------------------- | ----------------------------- |
-| [Landing Page Redesign](landing-page/)          | Does the new page convert more visitors?  | **+1.35pp conversion lift**   |
+| Case study | Question | Result |
+|---|---|---|
+| [Landing Page Redesign](landing-page/) | Does the new page convert more visitors? | **+1.35pp conversion lift** |
 | [Smart Onboarding Assistant](smart-onboarding/) | Does guided onboarding improve retention? | **+4.11pp D7 retention lift** |
-
-Both datasets are synthetic and designed to reflect realistic experimentation conditions. The goal is to demonstrate the decision-making process, not present simulated numbers as real company results.
-
----
 
 ## 01. Landing Page Redesign
 
-**Decision:** Should the new landing page replace the existing experience?
+**Decision:** Should the new landing page replace the old one?
 
 The test covered **8,200 visitors over 42 days**.
 
-The redesigned page increased conversion from **3.08% to 4.44%**, a **1.35 percentage-point lift** and **43.9% relative improvement**.
+Conversion moved from **3.08% to 4.44%**, a **1.35 percentage-point lift** and **43.9% relative improvement**.
 
-The result was statistically significant, with a p-value of **0.0013** and a 95% confidence interval of **+0.53pp to +2.18pp**.
+The p-value was **0.0013**, with a 95% confidence interval of **+0.53pp to +2.18pp**.
 
-Bounce rate also fell and time on page increased, supporting the conversion result with stronger engagement.
+Bounce rate also fell and time on page increased.
 
-**Business takeaway:** The redesign produced a meaningful conversion improvement across the tested traffic. The evidence supports rollout rather than treating the result as a random fluctuation.
+**What I would do:** the evidence supports rolling out the redesign for the tested traffic, while continuing to watch the result after release.
 
 [Read the full landing page case study →](landing-page/)
 
----
-
 ## 02. Smart Onboarding Assistant
 
-**Decision:** Can guided onboarding improve early user retention?
+**Decision:** Can guided onboarding improve early retention?
 
 The experiment covered **7,500 new mobile users**.
 
-D7 retention increased from **36.54% to 40.65%**, a **4.11 percentage-point lift** and **11.3% relative improvement**.
+D7 retention moved from **36.54% to 40.65%**, a **4.11 percentage-point lift** and **11.3% relative improvement**.
 
-The result was statistically significant, with a p-value of **0.0003** and a 95% confidence interval of **+1.91pp to +6.31pp**.
+The p-value was **0.0003**, with a 95% confidence interval of **+1.91pp to +6.31pp**.
 
-Session length and screens viewed also increased, suggesting the retention improvement was accompanied by stronger early engagement.
-
-But there is an important product insight: only **37.8% of treatment users actually used the Assistant**, and the observed lift came from that group.
-
-**Business takeaway:** The feature shows promise, but the next opportunity is discoverability. Before simply scaling the feature, test whether better exposure can increase adoption and extend the retention benefit to more users.
+There is a catch. Only **37.8% of treatment users actually used the Assistant**. The next test should therefore look at whether better exposure increases adoption and whether the retention effect holds for more users.
 
 [Read the full onboarding case study →](smart-onboarding/)
 
----
+## How I make the decision
 
-## How I Make Experiment Decisions
-
-The analysis follows a simple principle:
-
-**Do not ship because the number looks good. Ship when the evidence supports the business decision.**
+I don't ship a feature just because the number looks good.
 
 For each experiment I check:
 
-* Was the experiment properly randomized?
-* Is the observed lift statistically reliable?
-* How large could the real effect reasonably be?
-* Does the result hold across important segments?
-* Are engagement metrics moving in the same direction?
-* Is the effect large enough to matter commercially?
-* Does the test have enough statistical power?
-* Are we measuring assigned users or only people who chose to engage?
+- Was the experiment randomized correctly?
+- Is the lift statistically reliable?
+- How large could the real effect be?
+- Does the result hold across important groups?
+- Are supporting engagement measures moving in the same direction?
+- Is the effect large enough to matter to the business?
+- Did the test have enough power?
+- Are we analyzing everyone who was assigned to treatment, or only the people who chose to use the feature?
 
-This keeps the analysis focused on one question:
+The final question is simple: **what should the product team do next?**
 
-> **What should the product team do next?**
+## Main statistical choices
 
----
+**Conversion and retention:** two-proportion z-tests for the primary binary outcomes.
 
-## Key Analytical Decisions
+**Engagement:** Mann-Whitney U tests for skewed session and screen-count data.
 
-**Conversion and retention:** Two-proportion z-tests were used for the primary binary outcomes.
+**Uncertainty:** confidence intervals are reported alongside p-values.
 
-**Engagement:** Mann-Whitney U tests were used for skewed session and screen-count data.
+**Multiple comparisons:** Bonferroni correction was used for segment tests.
 
-**Uncertainty:** Every primary result is reported with a confidence interval, not just a p-value.
+**Causal analysis:** intent-to-treat is the main analysis. Adopter results are supporting evidence, not proof that the feature caused the outcome.
 
-**Multiple comparisons:** Bonferroni correction was applied to segment testing to reduce false positives.
+**Experiment quality:** power and minimum detectable effect were checked before interpreting the size of the result.
 
-**Causal analysis:** Intent-to-treat remains the primary analysis. Adopter results are treated as supporting evidence, not proof of causality.
+## What this shows
 
-**Experiment quality:** Power and minimum detectable effect were checked before interpreting the business impact.
+The workflow is:
 
----
+**Product idea → controlled test → statistical result → business impact → shipping decision**
 
-## Business Value
+The aim is not to collect significant p-values. It is to answer practical questions:
 
-This portfolio demonstrates a practical experimentation workflow:
+- Should we ship it?
+- Should we keep testing?
+- What should we change next?
+- Is the expected upside large enough to justify the work?
 
-**Product idea → controlled experiment → statistical evidence → business impact → shipping decision**
-
-The goal is not simply to find statistically significant results.
-
-It is to help a product team answer:
-
-* **Should we ship it?**
-* **Should we keep testing?**
-* **What should we improve next?**
-* **Is the expected business upside large enough to justify the investment?**
-
----
-
-## What's Included
+## What's included
 
 ```text
 AB-Testing/
@@ -131,16 +107,14 @@ AB-Testing/
 
 Python, pandas, NumPy, SciPy, statsmodels, matplotlib, Jupyter, Power BI, Git/GitHub.
 
-The notebooks contain the full analysis workflow from data validation through statistical testing and business interpretation.
+The notebooks contain the analysis from data checks through statistical testing and interpretation.
 
----
+## Important limitations
 
-## Important Limitations
+- The datasets are synthetic.
+- Financial impact estimates are scenarios, not observed company revenue.
+- The onboarding test ran below its target statistical power, so the confidence interval matters when judging the size of the opportunity.
+- Segment findings are exploratory unless they were independently powered.
+- D7 retention and a 42-day conversion test are early indicators. A real rollout should include longer-term monitoring or a holdout group.
 
-* The datasets are synthetic.
-* Financial impact estimates are scenario-based, not observed revenue.
-* The onboarding experiment ran below its target statistical power, so the confidence interval matters when judging the size of the opportunity.
-* Segment findings are treated as exploratory unless independently powered.
-* D7 retention and a 42-day conversion test are early indicators. A real rollout should include longer-term monitoring or a holdout group to confirm that the effect persists.
-
-**The standard I am demonstrating here is simple: test the idea, quantify the uncertainty, understand the business impact, then make the decision.**
+The standard I use is simple: test the idea, measure the uncertainty, understand what the result means for the business, and then decide what to do next.
